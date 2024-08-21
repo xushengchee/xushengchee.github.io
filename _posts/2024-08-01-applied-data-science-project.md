@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/c6e317ec-1265-4dfc-bae3-b95ea2e7f169)![image](https://github.com/user-attachments/assets/34fff7a8-d285-41bc-9ebc-216e09a16372)---
 layout: post
 author: Xu ShengChee
 title: "Applied Data Science Project Documentation"
@@ -64,11 +63,60 @@ Visualiation:
 ![image](https://github.com/user-attachments/assets/2fc97ad3-6145-474a-ba5a-f73fd40009de)
 
 
+4. Finally, supplementary visualizations were created to complement the histograms produced by ydata-profiling and to provide a more detailed exploration of the input and target (imbd score) variables.
 
+![image](https://github.com/user-attachments/assets/e435cd9b-130e-444d-900e-688a9615134c)
+![image](https://github.com/user-attachments/assets/47200b64-1e73-4d07-b37c-6ede03336947)
+
+5. Addition visualizations were done for features such as year of release, runtime of movies/shows. Country of production ranked based on number of movies/shows produced
+
+![image](https://github.com/user-attachments/assets/708070eb-d2b7-4204-ae1e-6d4cba9a36a3)
 
 
 ### Data Preparation
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
+
+Duplicate entries were removed based on both the title AND the release year. This approach addresses the common occurrence of remakes sharing the same title, ensuring that each instance is treated as a distinct record during modeling. Additionally, records with missing values in the target variable were removed.
+
+![image](https://github.com/user-attachments/assets/1601e204-b80d-4f98-b7fb-bb09898aab4c)
+
+
+Subsequently, we remove entries that do not make logical sense
+•	Records without target variable
+•	Records with runtime that is = 0
+
+![image](https://github.com/user-attachments/assets/f10aa118-82c5-4337-bb4b-8fd346448ca7)
+
+
+The dataset includes information on both movies and television shows. While movies typically have a shorter runtime, shows may be broadcast over multiple seasons or episodes. Therefore, it is proposed to combine runtime and seasons into a single feature, 'runtime_combined', to more accurately represent the total duration of each title.
+
+![image](https://github.com/user-attachments/assets/555c68fc-8779-4fbe-b0b8-985299c16b00)
+
+
+One hot encoding was also performed on categorical features
+•	Type (Movie vs Show)
+•	Genres
+•	Production country
+•	Content rating
+•	Year of movie release
+
+![image](https://github.com/user-attachments/assets/c137f6c3-0c0b-42a9-83dc-dd3ede66fa84)
+
+Additional Feature engineering
+•	The first production country listed was mapped to its corresponding continent to simplify the number of dimensions, while other production countries were excluded.
+•	Content ratings were grouped into bins to consolidate similar age bands and reduce dimensionality.
+•	The year of movie release was binned into three equal-sized intervals.
+•	Features not intended for modeling were removed at this stage.
+
+![image](https://github.com/user-attachments/assets/592ad03c-b919-493b-b0b5-9f36458ff7ef)
+![image](https://github.com/user-attachments/assets/2b7ad601-a617-452c-bc1b-b895eeec356c)
+
+
+Feature engineering step specific to objective 3
+• Converted IMDB score valeus into data by creating a new column "worth_watching?". Movies and shows with IMDB score greater or equal to 7 were labelled as “worth_watching” while <7 as “waste of time”.
+ 
+![image](https://github.com/user-attachments/assets/273bd3f2-cbba-4b1a-920b-b47966eebfc1)
+
+
 
 ### Modelling
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
