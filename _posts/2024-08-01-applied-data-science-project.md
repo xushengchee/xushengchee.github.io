@@ -32,9 +32,11 @@ The repository outlines the effort made towards Business Objective #3: 3. Train 
 The goal is to automate the process of predicting if a particular new movie would be well rated by IMDB.
 
 The work accomplished for the other business objectives are detailed in the following sites:
-Business Objective #1
-Business Objective #2
-Business Objective #4
+[Business Objective #1](https://kokjian.github.io/itd214/2024/08/01/applied-data-science-project.html)
+
+[Business Objective #2](https://siewlw.github.io/itd214/2024/08/01/applied-data-science-project.html)
+
+[Business Objective #4](https://jianweigoh.github.io/itd214/2024/08/01/applied-data-science-project.html)
 
 
 
