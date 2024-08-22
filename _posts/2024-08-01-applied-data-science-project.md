@@ -1,4 +1,4 @@
-layout: post
+![image](https://github.com/user-attachments/assets/c460524f-aeda-4755-ae94-ed5c43898ce0)layout: post
 author: Xu ShengChee
 title: "Applied Data Science Project Documentation"
 categories: ITD214
@@ -111,32 +111,82 @@ Additional Feature engineering
 ![image](https://github.com/user-attachments/assets/2b7ad601-a617-452c-bc1b-b895eeec356c)
 
 
-Feature engineering step specific to objective 3
+## Modelling
+
+Prior to modelling, feature engineering step specific to objective 3 were executed:
 • Converted IMDB score valeus into data by creating a new column "worth_watching?". Movies and shows with IMDB score greater or equal to 7 were labelled as “worth_watching” while <7 as “waste of time”.
  
 ![image](https://github.com/user-attachments/assets/273bd3f2-cbba-4b1a-920b-b47966eebfc1)
 
 
+#### Inputs and output variables 
 
-### Modelling
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
+To predict whether an IMDb movie is worth watching, input variables such as runtime, genre, maturity rating, year of release, and country of production were fed into the models.
 
-### Evaluation
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
+![image](https://github.com/user-attachments/assets/c0072054-904c-4db6-b060-987d5bdc891b)
+
+
+#### Models used in testing
+
+![image](https://github.com/user-attachments/assets/993d2c6d-43b9-46a9-bcce-0d4504c6fd01)
+
+#### Multicolinarity check
+
+Before initiating the modeling process, a multicollinearity check was performed on the dataset to ensure that no two or more predictor variables in the model were highly correlated. High correlations can make it difficult to determine the individual effect of each predictor.
+
+![image](https://github.com/user-attachments/assets/36647b4a-7ff8-47c9-a425-4b04fced14ac)
+
+The correlation matrix did not indicate any issues with multicollinearity.
+
+### Modelling - Results of binary classification model
+
+The five models were compared based on their performance metrics, including accuracy, precision, and recall scores. Each model was ranked according to its accuracy score. Among the five models, Random Forest emerged as the most accurate in predicting whether a movie is "worth watching."
+
+
+| Model                 | Accuracy | Precision | Recall |
+|-----------------------|----------|-----------|--------|
+| Random Forest         | 0.70417  | 0.651961  | 0.532  |
+| Support Vector Machine| 0.691581 | 0.647541  | 0.474  |
+| Logistic Regression   | 0.690795 | 0.633416  | 0.508  |
+| Neural Network        | 0.685287 | 0.585616  | 0.684  |
+| Decision Tree         | 0.661684 | 0.572917  | 0.55   |
+
+The following are the features of the model:
+
+![image](https://github.com/user-attachments/assets/75068552-38e2-4cfe-8cf7-dcc56cc5af64)
+
+To identify the important features contributing to our model, I filtered out those with a weight above 0.02.
+
+![image](https://github.com/user-attachments/assets/528a2600-7c45-48be-83e4-e241a2691933)
+
 
 ## Recommendation and Analysis
-Explain the analysis and recommendations
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
+The models performed reasonably well, with accuracies ranging from 0.66 to 0.70. Among them, the Random Forest model yielded the most accurate results. Precision varied from 0.57 to 0.65, while recall ranged from 0.44 to 0.55. The Neural Network achieved the highest precision (0.692), and the Decision Tree had the highest recall (0.446). 
+
+Overall, the Random Forest model provides the most balanced results in terms of accuracy, precision, and recall.
+
+By analyzing the Random Forest model, we found that movie runtime and whether the show is a movie or not are the most significant factors influencing the outcome. Among the genres, 'documentary,' 'drama,' and 'comedy' contribute more to the outcome. Maturity rating, year of release, and country of production do not appear to significantly affect the outcome.
+
+
+#### Areas for improvement
+Based on logical reasoning and cultural understanding, the IMDb dataset we used does not include information on the budget of shows or details about the directors, actors, and actresses involved. Additionally, different movies may perform variably across countries due to differing cultural contexts.
+
+There are several areas for potential investigation to enhance the analysis:
+•	Seasonality of Release Dates: Investigate how the time of year when shows are released may affect their performance.
+•	Geopolitical Climate: Consider the impact of geopolitical events on movie performance.
+•	Seasonal Variations: Examine how different seasons of the year might influence viewer preferences and movie success.
+
+
 
 ## AI Ethics
-Discuss the potential data science ethics issues (privacy, fairness, accuracy, accountability, transparency) in your project. 
+
+The dataset did not contain any personal or confidential information. While the model's inability to accurately predict the success of a movie or show is unlikely to cause societal harm, it could impact the production company financially. Therefore, it is recommended that a human-in-the-loop approach be considered when using this classification model. This approach is not necessarily about safety but rather acknowledges that certain aspects of film and show creation cannot be fully addressed by machine learning alone. Additional insights from other sources are needed for more informed and strategic decision-making. The model should be used to support decision-making processes rather than to replace human judgment and draw conclusions independently.
 
 ![image](https://github.com/user-attachments/assets/d21e68d2-611c-4c06-95e2-4edae1afe9a1)
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.
+
 
 ## Source Codes and Datasets
-Upload your model files and dataset into a GitHub repo and add the link here. 
 https://github.com/xushengchee/ITD214
