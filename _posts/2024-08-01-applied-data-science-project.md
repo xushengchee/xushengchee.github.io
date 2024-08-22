@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/c460524f-aeda-4755-ae94-ed5c43898ce0)layout: post
+layout: post
 author: Xu ShengChee
 title: "Applied Data Science Project Documentation"
 categories: ITD214
